@@ -51,14 +51,11 @@ class ExampleApi(private val rpcOps: CordaRPCOps) {
     @POST
     @Path("borrow")
     @Produces(MediaType.APPLICATION_JSON)
-    fun borrowItem(@QueryParam("item") itemId: Int,
-                                           @QueryParam("time") time: Int,
-                                           @QueryParam("hourPrice") hourPrice: Int,
-                                           @QueryParam("contractId") contractId: Int,
-                                           @QueryParam("partyName") partyName: CordaX500Name?): Response {
-            if (itemId <= 0 ) {
-            return Response.status(BAD_REQUEST).entity("Query parameter 'item' must be non-negative.\n").build()
-        }
+    fun borrowItem(@QueryParam("item") itemId: String,
+                   @QueryParam("time") time: Int,
+                   @QueryParam("hourPrice") hourPrice: Int,
+                   @QueryParam("contractId") contractId: Int,
+                   @QueryParam("partyName") partyName: CordaX500Name?): Response {
         if (partyName == null) {
             return Response.status(BAD_REQUEST).entity("Query parameter 'partyName' missing or has wrong format.\n").build()
         }

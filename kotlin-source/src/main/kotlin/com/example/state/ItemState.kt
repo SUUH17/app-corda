@@ -16,7 +16,7 @@ import java.util.*
  * @param lender the party issuing the IOU.
  * @param borrower the party receiving and approving the IOU.
  */
-data class ItemState(val value: Int,
+data class ItemState(val value: String,
                      val lender: Party,
                      val borrower: Party,
                      val status: Int,

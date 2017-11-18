@@ -17,7 +17,7 @@ import net.corda.core.utilities.ProgressTracker.Step
 object BorrowFlow {
     @InitiatingFlow
     @StartableByRPC
-    class Initiator(val itemId: Int,
+    class Initiator(val itemId: String,
                     val otherParty: Party,
                     val time: Int,
                     val hourPrice: Int,
