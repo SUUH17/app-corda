@@ -13,6 +13,7 @@ import net.corda.core.transactions.SignedTransaction
 import net.corda.core.transactions.TransactionBuilder
 import net.corda.core.utilities.ProgressTracker
 import net.corda.core.utilities.ProgressTracker.Step
+import java.time.LocalTime
 
 object BorrowFlow {
     @InitiatingFlow
@@ -54,7 +55,8 @@ object BorrowFlow {
             // Stage 1.
             progressTracker.currentStep = GENERATING_TRANSACTION
             // Generate an unsigned transaction.
-            val iouState = ItemState(itemId, otherParty, serviceHub.myInfo.legalIdentities.first(), 1, time, hourPrice, contractId)
+            val initTime = System.currentTimeMillis()/1000;
+            val iouState = ItemState(itemId, otherParty, serviceHub.myInfo.legalIdentities.first(), 1, initTime.toInt(), time, hourPrice, contractId)
             val txCommand = Command(ItemContract.Commands.Create(), iouState.participants.map { it.owningKey })
             val txBuilder = TransactionBuilder(notary).withItems(StateAndContract(iouState, ITEM_CONTRACT_ID), txCommand)
 
